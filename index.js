@@ -1,6 +1,7 @@
 const http = require('http');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
+const config = require('./config')
 
 const server = http.createServer(function(req, res) {
   // Send the URL and parse it
@@ -63,8 +64,8 @@ const server = http.createServer(function(req, res) {
 
 })
 
-server.listen(3000, function() {
-  console.log('The server is listening on port 3000')
+server.listen(config.PORT, function() {
+  console.log(`The server is listening on port ${config.PORT} in ${config.ENV_NAME}`)
 })
 
 // Define the handlers
