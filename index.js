@@ -2,7 +2,7 @@ const http = require('http');
 const https = require('https');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
-const config = require('./config');
+const config = require('./lib/config');
 const fs = require('fs');
 const handlers = require('./lib/handlers');
 const helpers = require('./lib/helpers');
@@ -60,7 +60,6 @@ const unifiedServer = function(req, res) {
 
     // Choose the handler the request should go to. If one is not found use the not found handler
     const choosenHandler = typeof(router[trimmedPath]) !== undefined && router[trimmedPath] ? router[trimmedPath] : handlers.notFound
-    console.log(choosenHandler, trimmedPath)
     // Construct the data object to send to the handler
     const data = {
       'trimmedPath': trimmedPath,
@@ -70,7 +69,7 @@ const unifiedServer = function(req, res) {
       'payload': helpers.parseJsonToObject(buffer)
     }
 
-    console.log(buffer)
+    // console.log(buffer, data.payload)
     // Route the request to the handler specified in the router
     choosenHandler(data, function(statusCode, payload) {
       // Use the statusCode called back by the handler, or default to 200   
