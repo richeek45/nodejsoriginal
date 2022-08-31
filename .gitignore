@@ -129,4 +129,4 @@ yarn-error.log*
 # other files
 cert.txt
 /https
-/config.js
+/lib/config.js
